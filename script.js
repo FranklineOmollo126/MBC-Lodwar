@@ -26,3 +26,11 @@
                 dots[index].classList.add('active-dot');
                 currentIndex = index;
             }
+                 function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function startSlider() {
+                if (intervalId) clearInterval(intervalId);
+                intervalId = setInterval(nextSlide, intervalTime);
+            }
