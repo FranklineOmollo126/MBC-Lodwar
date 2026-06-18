@@ -100,10 +100,115 @@
                 item.name.toLowerCase().includes(query.toLowerCase())
             );
 
-            if (results.length === 0) {
-                searchResults.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas
+         if (results.length === 0) {
+        searchResults.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search" style="font-size: 40px; display: block; margin-bottom: 15px; color: #dce3ec;"></i>
+                <h3 style="color: #0b2b4a; margin-bottom: 8px;">No results found</h3>
+                <p style="color: #8a9bb0;">Try searching for "Printing", "KRA", or "Website"</p>
+            </div>
+        `;
+        searchOverlay.classList.add('active');
+        return;
+    }
+
+    let resultsHTML = '';
+    results.forEach(item => {
+        resultsHTML += `
+            <div class="result-item" data-section="${item.section}">
+                <i class="fas ${item.icon}"></i>
+                <div>
+                    <div class="result-title">${item.name}</div>
+                    <div class="result-desc">Click to navigate to ${item.name}</div>
+                </div>
+            </div>
+        `;
+    });
+
+    searchResults.innerHTML = resultsHTML;
+    searchOverlay.classList.add('active');
+
+    // Add click listeners to results
+    document.querySelectorAll('.result-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const section = this.dataset.section;
+            const target = document.querySelector(section);
+            if (target) {
+                const navbarHeight = document.querySelector('.navbar-wrapper').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close search overlay
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+            }
+        });
+    });
+}
+
+//  SEARCH EVENT LISTENERS 
+
+// Search on button click
+searchBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    performSearch(searchInput.value);
+});
+
+// Search on Enter key
+searchInput.addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        performSearch(this.value);
+    }
+});
+
+
+
+// Close search overlay when clicking outside
+document.addEventListener('click', function(e) {
+    if (searchOverlay.classList.contains('active')) {
+        if (!searchOverlay.contains(e.target) && 
+            !searchInput.contains(e.target) && 
+            !searchBtn.contains(e.target)) {
+            searchOverlay.classList.remove('active');
+        }
+    }
+});
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+        searchOverlay.classList.remove('active');
+        searchInput.value = '';
+    }
+});
+
+// SMOOTH SCROLL FOR NAV LINKS 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#") return;
+        
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+            const navbarHeight = document.querySelector('.navbar-wrapper').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+console.log('✅ Search functionality loaded successfully!');
+
+          
 
 
 
