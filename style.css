@@ -171,6 +171,35 @@
             color: #8a9bb0;
             padding: 30px;
         }
+        @media (max-width: 992px) {
+                .search-container {
+                flex: 0 1 200px;
+            }
+                    
+        }
+       @media (max-width: 768px) {
+              .search-container {
+                order: 3;
+                flex: 1 1 100%;
+                padding: 6px 6px 6px 16px;
+            }
+
+            .search-container .search-btn span {
+                display: none;
+            }
+              .search-overlay {
+                top: 150px;
+                padding: 20px;
+            }
+              
+       }
+        @media (max-width: 450px) {
+                .search-container input {
+                font-size: 13px;
+            }
+               
+        }
+       
 
         .nav-links {
             display: flex;
