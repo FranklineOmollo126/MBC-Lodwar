@@ -82,6 +82,31 @@
             { name: 'Online Applications', icon: 'fa-laptop', section: '#services' },
             { name: 'HELB Application', icon: 'fa-user-graduate', section: '#services' }
         ];
+          // Additional searchable content
+        const pages = [
+            { name: 'Home', icon: 'fa-home', section: '#home' },
+            { name: 'About Us', icon: 'fa-info-circle', section: '#about' },
+            { name: 'Pricing', icon: 'fa-tag', section: '#pricing' },
+            { name: 'Contact Us', icon: 'fa-envelope', section: '#contact' }
+        ];
+        const allSearchable = [...services, ...pages];
+         function performSearch(query) {
+            if (!query.trim()) {
+                searchOverlay.classList.remove('active');
+                return;
+            }
+
+            const results = allSearchable.filter(item =>
+                item.name.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (results.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas
+
+
+
 
 
 
