@@ -34,3 +34,21 @@
                 if (intervalId) clearInterval(intervalId);
                 intervalId = setInterval(nextSlide, intervalTime);
             }
+         function stopSlider() {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+                
