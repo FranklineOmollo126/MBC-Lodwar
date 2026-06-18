@@ -40,6 +40,29 @@
                     intervalId = null;
                 }
             }
+                // Dot clicks
+            dots.forEach((dot) => {
+                dot.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index, 10);
+                    stopSlider();
+                    goToSlide(idx);
+                    startSlider();
+                });
+            });
+
+            // Pause on hover/touch
+            const sliderContainer = document.getElementById('heroSlider');
+            sliderContainer.addEventListener('mouseenter', stopSlider);
+            sliderContainer.addEventListener('mouseleave', startSlider);
+            sliderContainer.addEventListener('touchstart', stopSlider, { passive: true });
+            sliderContainer.addEventListener('touchend', startSlider, { passive: true });
+
+            // Init
+            goToSlide(0);
+            startSlider();
+
+            console.log('✅ Image slider running – switches every 3 seconds.');
+        })();
 
 
 
