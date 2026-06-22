@@ -145,68 +145,7 @@ console.log('✅ Search functionality loaded successfully!');
 */
 // Mobile menu
 
-const hamburger = document.querySelector('.hamburger');
 
-const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click',()=>{
-
-navLinks.classList.toggle('active');
-
-});
-
-
-// Active navbar while scrolling
-
-const sections = document.querySelectorAll('section');
-
-const navItems = document.querySelectorAll('.nav-link');
-
-
-window.addEventListener('scroll',()=>{
-
-let current='';
-
-
-sections.forEach(section=>{
-
-const sectionTop = section.offsetTop - 150;
-
-const sectionHeight = section.clientHeight;
-
-
-if(pageYOffset >= sectionTop){
-
-current = section.getAttribute('id');
-
-}
-
-});
-
-
-navItems.forEach(link=>{
-
-link.classList.remove('active');
-
-
-if(link.getAttribute('href') === '#' + current){
-
-link.classList.add('active');
-
-}
-
-});
-
-});
-
-
-// Keep Home active on first load
-
-window.addEventListener('load',()=>{
-
-document.querySelector('.nav-link').classList.add('active');
-
-});
 
 //  HERO SLIDER
         (function() {
@@ -289,7 +228,68 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
+const hamburger = document.querySelector('.hamburger');
 
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click',()=>{
+
+navLinks.classList.toggle('active');
+
+});
+
+
+// Active navbar while scrolling
+
+const sections = document.querySelectorAll('section');
+
+const navItems = document.querySelectorAll('.nav-link');
+
+
+window.addEventListener('scroll',()=>{
+
+let current='';
+
+
+sections.forEach(section=>{
+
+const sectionTop = section.offsetTop - 150;
+
+const sectionHeight = section.clientHeight;
+
+
+if(pageYOffset >= sectionTop){
+
+current = section.getAttribute('id');
+
+}
+
+});
+
+
+navItems.forEach(link=>{
+
+link.classList.remove('active');
+
+
+if(link.getAttribute('href') === '#' + current){
+
+link.classList.add('active');
+
+}
+
+});
+
+});
+
+
+// Keep Home active on first load
+
+window.addEventListener('load',()=>{
+
+document.querySelector('.nav-link').classList.add('active');
+
+});
           
 
 
