@@ -269,25 +269,44 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         navLinksMenu.classList.remove('active');
     });
 });
-// 6. CONTACT FORM SUBMISSION 
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-                // Get form data
-        const name = this.querySelector('input[type="text"]')?.value || '';
-        const email = this.querySelector('input[type="email"]')?.value || '';
-        const phone = this.querySelector('input[type="tel"]')?.value || '';
-        const service = this.querySelector('select')?.value || '';
-        const message = this.querySelector('textarea')?.value || '';
-        
-        // Show success message
-        alert(`Thank you ${name}! We have received your message and will get back to you soon.`);
-        
-        // Reset form
-        this.reset();
-    });
-}
+// 6. CONTACT FORM SUBMISSION- with web3forms submiting to gmail
+const form = document.getElementById('contactForm'); 
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    formData.append("access_key", "90aa4211-3d31-4f1f-9c2b-c5ec8758e753");
+
+    const originalHTML = submitBtn.innerHTML; 
+
+    submitBtn.innerHTML = "Sending...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Success! Your message has been sent.");
+        form.reset();
+      } else {
+        alert("Error: " + data.message);
+      }
+
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      submitBtn.innerHTML = originalHTML; 
+      submitBtn.disabled = false;
+    }
+  });
+
 
 // 7. CONSOLE CONFIRMATION
 
