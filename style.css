@@ -1,4 +1,4 @@
-/*BASE STYLES*/
+╒/*BASE STYLES*/
 * {
     margin: 0;
     padding: 0;
@@ -695,6 +695,77 @@ section h2::after {
     background-repeat: no-repeat;
     background-position: right 16px center;
 }
+
+/* ============================================
+   FILE INPUT STYLES
+   ============================================ */
+
+/* Style the file input */
+.input-group input[type="file"] {
+    padding: 14px 18px 14px 48px;
+    border: 2px solid #eef3f9;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    background: #fafcff;
+    color: #1e2f4e;
+    width: 100%;
+    cursor: pointer;
+}
+
+.input-group input[type="file"]:hover {
+    border-color: #e67e22;
+}
+
+.input-group input[type="file"]:focus {
+    outline: none;
+    border-color: #e67e22;
+    box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.08);
+}
+
+/* File info text */
+.file-info {
+    font-size: 0.85rem;
+    color: #5a6e85;
+    margin-top: -10px;
+    padding-left: 48px;
+}
+
+.file-info i {
+    color: #e67e22;
+    margin-right: 6px;
+}
+
+/* Selected file name display */
+.file-selected {
+    background: #f0f7e8;
+    border: 1px solid #4caf50;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: #2e7d32;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-selected i {
+    color: #4caf50;
+}
+
+.file-selected .remove-file {
+    cursor: pointer;
+    color: #d32f2f;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+.file-selected .remove-file:hover {
+    color: #b71c1c;
+}
+
 
 /*SUBMIT BUTTON*/
 .btn-primary {
