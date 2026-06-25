@@ -307,6 +307,114 @@ const form = document.getElementById('contactForm');
     }
   });
 
+// 7. FILE ATTACHMENT HANDLING
+const fileInput = document.getElementById('fileAttachment');
+const fileInfo = document.getElementById('fileInfo');
+
+if (fileInput) {
+    // Show file name when selected
+    fileInput.addEventListener('change', function() {
+        const fileName = this.files[0]?.name;
+        const fileSize = this.files[0]?.size;
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        
+        if (this.files.length > 0) {
+            // Check file size
+            if (fileSize > maxSize) {
+                alert('File is too large! Maximum size is 5MB.');
+                this.value = ''; // Clear the input
+                fileInfo.innerHTML = `
+                    <i class="fas fa-exclamation-circle" style="color: #d32f2f;"></i>
+                    File too large! Maximum size is 5MB. Supported formats: PDF, DOC, DOCX, JPG, PNG, TXT
+                `;
+                fileInfo.style.color = '#d32f2f';
+                return;
+            }
+            
+            // Show success message with file name
+            fileInfo.innerHTML = `
+                <div class="file-selected">
+                    <i class="fas fa-file"></i>
+                    <span>${fileName}</span>
+                    <span style="font-size: 0.75rem; color: #5a6e85;">
+                        (${(fileSize / 1024).toFixed(1)} KB)
+                    </span>
+                    <span class="remove-file" onclick="removeFile()">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            `;
+            fileInfo.style.color = '#2e7d32';
+        } else {
+            // Reset if no file selected
+            fileInfo.innerHTML = `
+                <i class="fas fa-info-circle" style="color: #e67e22;"></i> 
+                Supported formats: PDF, DOC, DOCX, JPG, PNG, TXT (Max 5MB)
+            `;
+            fileInfo.style.color = '#5a6e85';
+        }
+    });
+}
+
+// Function to remove the selected file
+function removeFile() {
+    const fileInput = document.getElementById('fileAttachment');
+    if (fileInput) {
+        fileInput.value = '';
+        const fileInfo = document.getElementById('fileInfo');
+        fileInfo.innerHTML = `
+            <i class="fas fa-info-circle" style="color: #e67e22;"></i> 
+            Supported formats: PDF, DOC, DOCX, JPG, PNG, TXT (Max 5MB)
+        `;
+        fileInfo.style.color = '#5a6e85';
+    }
+}
+// 8. CONTACT FORM WITH FILE ATTACHMENT
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const name = this.querySelector('input[type="text"]')?.value || '';
+        const email = this.querySelector('input[type="email"]')?.value || '';
+        const phone = this.querySelector('input[type="tel"]')?.value || '';
+        const service = this.querySelector('select')?.value || '';
+        const message = this.querySelector('textarea')?.value || '';
+        const file = document.getElementById('fileAttachment')?.files[0] || null;
+        
+        // Build message
+        let alertMessage = `Thank you ${name}! We have received your message.\n\n`;
+        alertMessage += `Service Requested: ${service}\n`;
+        alertMessage += `Email: ${email}\n`;
+        alertMessage += `Phone: ${phone || 'Not provided'}\n`;
+        alertMessage += `Message: ${message || 'No message provided'}\n`;
+        
+        if (file) {
+            alertMessage += `\n📎 File Attached: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        } else {
+            alertMessage += `\n📎 No file attached`;
+        }
+        
+        alertMessage += `\n\nWe will get back to you soon!`;
+        
+        // Show success message
+        alert(alertMessage);
+        
+        // Reset form
+        this.reset();
+        
+        // Reset file info
+        const fileInfo = document.getElementById('fileInfo');
+        if (fileInfo) {
+            fileInfo.innerHTML = `
+                <i class="fas fa-info-circle" style="color: #e67e22;"></i> 
+                Supported formats: PDF, DOC, DOCX, JPG, PNG, TXT (Max 5MB)
+            `;
+            fileInfo.style.color = '#5a6e85';
+        }
+    });
+}
 
 // 7. CONSOLE CONFIRMATION
 
