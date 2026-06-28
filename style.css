@@ -1,4 +1,4 @@
-╒/*BASE STYLES*/
+/*BASE STYLES*/
 * {
     margin: 0;
     padding: 0;
@@ -918,8 +918,145 @@ section h2::after {
         .btn-cta:hover i {
             transform: translateX(4px);
         }
+      /* ABOUT RESPONSIVE */
+@media (max-width: 992px) {
+    .about-overview {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-vmv {
+        grid-template-columns: 1fr 1fr;
+    }
+    .vmv-card.values {
+        grid-column: span 2;
+    }
+    .quality-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .quality-item:last-child {
+        grid-column: span 2;
+    }
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    .detail-item {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .detail-value {
+        text-align: left;
+    }
+}
+
+/* MOBILE & TABLET */
+@media (max-width: 768px) {
+    #about {
+        padding: 50px 16px;
+        border-radius: 16px;
+    }
+
+    .about-header h2 {
+        font-size: 2rem;
+    }
+    .about-overview {
+        grid-template-columns: 1fr;
+    }
+    .about-stats-mini {
+        grid-template-columns: 1fr 1fr;
+    }
+    .about-vmv {
+        grid-template-columns: 1fr;
+    }
+    .vmv-card.values {
+        grid-column: span 1;
+    }
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+    .quality-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quality-item:last-child {
+        grid-column: span 1;
+    }
+    .structure-bottom {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .structure-node {
+        min-width: unset;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .about-company-details {
+        padding: 30px 20px;
+    }
+
+    .about-structure {
+        padding: 30px 20px;
+    }
+
+    .about-expertise {
+        padding: 30px 20px;
+    }
+
+    .about-cta {
+        padding: 35px 20px;
+    }
+    .about-cta h3 {
+        font-size: 1.5rem;
+    }
+
+   
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
 
 
+@media (max-width: 450px) {
+    
+    .about-stats-mini {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+   
+    .stat-item {
+        padding: 16px 12px;
+    }
+
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+  
+    .about-company-details {
+        padding: 20px 16px;
+    }
+
+    .about-structure {
+        padding: 20px 16px;
+    }
+    .structure-node {
+        padding: 14px 20px;
+    }
+
+    .structure-node i {
+        font-size: 22px;
+    }
+    .quality-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
 /*SERVICES */
 .service-grid {
     display: grid;
